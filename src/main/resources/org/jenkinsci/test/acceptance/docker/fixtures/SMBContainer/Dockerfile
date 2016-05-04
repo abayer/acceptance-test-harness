@@ -4,7 +4,7 @@
 
 FROM ubuntu:trusty
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
 
 RUN useradd test -d /home/test -s /bin/bash && \
