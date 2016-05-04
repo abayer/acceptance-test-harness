@@ -3,10 +3,10 @@
 # and prepares for execution of gitplugin tests.
 #
 
-FROM ubuntu
+FROM ubuntu:trusty
 
 # make sure the package repository is up to date
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 RUN apt-get update
 
 # install SSHD

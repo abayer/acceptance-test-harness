@@ -3,7 +3,7 @@
 #
 
 # TODO have to inline SshdContainer/Dockerfile since 'FROM jenkins/sshd' does not work: jenkins/sshd is not pushed to the Docker registry, so we cannot build against it
-FROM ubuntu
+FROM ubuntu:trusty
 RUN apt-get update
 RUN apt-get install -y openssh-server
 RUN mkdir -p /var/run/sshd
@@ -17,7 +17,7 @@ RUN useradd test -d /home/test && \
 ENTRYPOINT ["/usr/sbin/sshd", "-D", "-e"]
 
 # JDK is from Universe
-RUN echo deb http://archive.ubuntu.com/ubuntu precise universe >> /etc/apt/sources.list
+RUN echo deb http://archive.ubuntu.com/ubuntu trusty universe >> /etc/apt/sources.list
 RUN apt-get install --no-install-recommends -y software-properties-common
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update

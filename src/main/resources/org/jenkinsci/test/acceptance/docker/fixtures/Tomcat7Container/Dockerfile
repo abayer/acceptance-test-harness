@@ -4,10 +4,10 @@
 # The admin user has username 'admin' and password 'tomcat'
 #
 
-FROM ubuntu
+FROM ubuntu:trusty
 
 # Tomcat7 is from Universe
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty universe" >> /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y tomcat7 tomcat7-admin
 

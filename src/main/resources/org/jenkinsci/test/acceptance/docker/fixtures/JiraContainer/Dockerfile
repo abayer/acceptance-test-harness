@@ -3,7 +3,7 @@
 #
 #    The initial password is 'admin:admin'
 # 
-FROM ubuntu
+FROM ubuntu:trusty
 
 # base package installation
 RUN apt-get update -y
