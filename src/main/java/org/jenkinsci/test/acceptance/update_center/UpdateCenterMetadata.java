@@ -86,16 +86,37 @@ public class UpdateCenterMetadata {
             if (d.optional || !shouldBeIncluded(jenkins, d)) continue;
             transitiveDependenciesOf(jenkins, plugins.get(d.name), d.version, result);
         }
-
-        if (!result.contains(p)) {
+        if (shouldAddPluginVersion(p, v, result)) {
             PluginMetadata use = p;
             if (use.requiredCore().isNewerThan(jenkins.getVersion())) {
                 // If latest version is too new for current Jenkins, use the declared one
+                result.add(p.withVersion(v));
+            } else if (v != null && new VersionNumber(use.getVersion()).isNewerThan(new VersionNumber(v))) {
                 result.add(p.withVersion(v));
             } else {
                 result.add(use);
             }
         }
+    }
+
+    private boolean shouldAddPluginVersion(PluginMetadata newPluginVersion, String requiredVersion, List<PluginMetadata> result) {
+        if (result.contains(newPluginVersion)) {
+            return false;
+        }
+
+        boolean newerNeeded = false;
+        boolean newPlugin = true;
+
+        for (PluginMetadata pm : result) {
+            if (pm.getName().equals(newPluginVersion.getName())) {
+                newPlugin = false;
+                if (requiredVersion == null || new VersionNumber(pm.getVersion()).isOlderThan(new VersionNumber(requiredVersion))) {
+                    newerNeeded = true;
+                }
+            }
+        }
+
+        return newerNeeded || newPlugin;
     }
 
     /**
