@@ -89,7 +89,7 @@ public class UpdateCenterMetadata {
                 // If latest version is too new for current Jenkins, use the declared one
                 result.add(p.withVersion(v));
             } else {
-                result.add(use);
+                result.add(use.withVersion(v));
             }
         }
     }
