@@ -36,6 +36,6 @@ public class SshCredentialDialog extends PageAreaImpl {
      * Adds this credential and close the modal dialog.
      */
     public void add() {
-        find(by.id("credentials-add-submit-button")).click();
+        find(by.id("credentials-add-submit")).click();
     }
 }
