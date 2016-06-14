@@ -80,6 +80,7 @@ public class CreateSlaveTest extends AbstractJUnitTest {
         SshPrivateKeyCredential sc = c.add(SshPrivateKeyCredential.class);
         sc.username.set(username);
         sc.description.set(description);
+        sc.setId("ssh_creds");
         sc.selectEnterDirectly().privateKey.set(privateKey);
 
         c.create();
