@@ -80,7 +80,7 @@ public class CreateSlaveTest extends AbstractJUnitTest {
         SshPrivateKeyCredential sc = c.add(SshPrivateKeyCredential.class);
         sc.username.set(username);
         sc.description.set(description);
-        sc.setId("ssh_creds");
+
         sc.selectEnterDirectly().privateKey.set(privateKey);
 
         c.create();
@@ -88,7 +88,7 @@ public class CreateSlaveTest extends AbstractJUnitTest {
         //now verify
         c.open();
         ManagedCredentials mc = new ManagedCredentials(jenkins);
-        String href = mc.credentialById("ssh_creds");
+        String href = mc.credentialById("SSH Key setup");
         c.setConfigUrl(href);
         verifyValueForCredential(c, sc.username, username);
         verifyValueForCredential(c, sc.selectEnterDirectly().privateKey, privateKey);
