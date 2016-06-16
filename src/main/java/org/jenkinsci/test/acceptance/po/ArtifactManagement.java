@@ -46,7 +46,7 @@ public class ArtifactManagement extends PageAreaImpl {
 
     public void clear() {
         try {
-            while (true) {
+            while (getElement(path("artifactManagerFactories/repeatable-delete")) != null) {
                 control("artifactManagerFactories/repeatable-delete").click();
             }
         } catch (NoSuchElementException ignored) {
