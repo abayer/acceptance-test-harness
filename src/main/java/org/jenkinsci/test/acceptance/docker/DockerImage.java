@@ -121,6 +121,7 @@ public class DockerImage {
 
             System.err.println("cidfile " + cidFile.getCanonicalPath() + " exists? - " + cidFile.exists());
             String cid = FileUtils.readFileToString(cidFile);
+            System.err.println("cidfile contents - '" + cid + "'");
             if (cid != null && cid.length() != 0) return cid;
 
             try {
