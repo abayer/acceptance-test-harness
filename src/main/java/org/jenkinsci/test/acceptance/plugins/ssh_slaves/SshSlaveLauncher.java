@@ -41,6 +41,7 @@ public class SshSlaveLauncher extends ComputerLauncher {
             self().findElement(by.xpath("//button[@class='credentials-add-menu']")).click();
 
             for (WebElement menuItem : self().findElements(by.xpath(providerXpathExpr))) {
+                System.err.println(" - wtf yo - " + menuItem.getAttribute("class"));
                 if (menuItem.isDisplayed()) {
                     menuItem.click();
                     break;
