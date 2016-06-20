@@ -37,7 +37,7 @@ public class SshSlaveLauncher extends ComputerLauncher {
             String providerXpathExpr = "//div[contains(@class,'credentials-add-menu-items')]"
                     + "/div[@class='bd']/ul[@class='first-of-type']/li[contains(@class, 'yuimenuitem')]"
                     + "/span[contains(@class,'yuimenuitemlabel') and contains(text(), 'Jenkins')]";
-
+            System.err.println(" ---- in menu case");
             self().findElement(by.xpath("//button[@class='credentials-add-menu']")).click();
 
             for (WebElement menuItem : self().findElements(by.xpath(providerXpathExpr))) {
