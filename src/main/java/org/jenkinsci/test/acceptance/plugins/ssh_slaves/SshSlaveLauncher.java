@@ -34,7 +34,7 @@ public class SshSlaveLauncher extends ComputerLauncher {
 
         if (getElement(by.xpath("//*[contains(@class,'credentials-add')]")) == null) {
 
-            String providerXpathExpr = "//div[contains(@class,'credentials-add-menu-item')]"
+            String providerXpathExpr = "//div[contains(@class,'credentials-add-menu-items')]"
                     + "/div[@class='bd']/ul[@class='first-of-type']/li[contains(@class, 'yuimenuitem')]"
                     + "/span[contains(@class,'yuimenuitemlabel') and contains(text(), 'Jenkins')]";
 
