@@ -32,7 +32,7 @@ public class SshSlaveLauncher extends ComputerLauncher {
 
     public SshCredentialDialog addCredential() {
 
-        if (getElement(by.xpath("//*[contains(@class,'credentials-add')]")) == null) {
+        if (getElement(by.xpath("//span[contains(@class,'credentials-add')]")) == null) {
 
             String providerXpathExpr = "//div[contains(@class,'credentials-add-menu-items')]"
                     + "/div[@class='bd']/ul[@class='first-of-type']/li[contains(@class, 'yuimenuitem')]"
