@@ -118,9 +118,11 @@ public class DockerImage {
         for (int i = 0; i < 10; i++) {
             Thread.sleep(500);
 
-            String cid = FileUtils.readFileToString(cidFile);
-            if (cid != null && cid.length() != 0) return cid;
-
+            if (cidFile.isFile() && cidFile.exists()) {
+                String cid = FileUtils.readFileToString(cidFile);
+                if (cid != null && cid.length() != 0) return cid;
+            }
+            
             try {
                 p.exitValue();
                 throw new IOException("docker died unexpectedly: "+docker+"\n"+ FileUtils.readFileToString(logfile));
