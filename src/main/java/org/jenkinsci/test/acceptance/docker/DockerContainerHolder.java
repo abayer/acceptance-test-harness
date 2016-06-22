@@ -60,6 +60,8 @@ public class DockerContainerHolder<T extends DockerContainer> implements Provide
                     // Only keep trying if the error is cidFile related.
                     if (!e.getMessage().contains("docker didn't leave CID file")) {
                         keepTrying = false;
+                    } else {
+                        System.err.println(" -- CID MISSING ");
                     }
                 }
                 try {
