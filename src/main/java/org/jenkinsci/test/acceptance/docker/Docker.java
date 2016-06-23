@@ -108,8 +108,10 @@ public class Docker {
         String tag = getDockerFileHash(dir);
         String full = image + ":" + tag;
 
-        cmd("pull").add(image).build().start().waitFor();
-        
+        Process pullProc = cmd("pull").add(full).build().start();
+        System.out.println("Pulling Docker image '" + full + "' - output " + IOUtils.toString(pullProc.getInputStream()));
+        pullProc.waitFor();
+
         // check if the image already exists
         if (cmd("images").add(image).popen().verifyOrDieWith("failed to query the status of the image").trim().contains(" " + tag + " ")) {
             return new DockerImage(full);
