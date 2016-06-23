@@ -95,7 +95,7 @@ public class Build extends ContainerPageObject {
     }
 
     public Build waitUntilFinished() {
-        return waitUntilFinished(120);
+        return waitUntilFinished(480);
     }
 
     public Build waitUntilFinished(int timeout) {
