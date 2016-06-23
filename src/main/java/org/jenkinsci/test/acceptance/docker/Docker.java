@@ -153,7 +153,7 @@ public class Docker {
             dir.mkdirs();
             try {
                 copyDockerfileDirectory(fixture, f, dir);
-                return build("jenkins/" + f.id(), dir, log);
+                return build("abayer1138/jenkins-ath-" + f.id(), dir, log);
             } finally {
                 FileUtils.deleteDirectory(dir);
             }
