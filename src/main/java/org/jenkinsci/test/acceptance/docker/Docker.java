@@ -108,6 +108,8 @@ public class Docker {
         String tag = getDockerFileHash(dir);
         String full = image + ":" + tag;
 
+        cmd("pull").add(image).build().start().waitFor();
+        
         // check if the image already exists
         if (cmd("images").add(image).popen().verifyOrDieWith("failed to query the status of the image").trim().contains(" " + tag + " ")) {
             return new DockerImage(full);
