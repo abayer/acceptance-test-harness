@@ -15,6 +15,7 @@ import static org.jenkinsci.test.acceptance.plugins.matrix_auth.MatrixRow.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -52,22 +53,24 @@ public class MatrixAuthPluginTest extends AbstractJUnitTest {
 
         j.save();
 
+        jenkins.logout();
+
         // if we login as Bob, he shouldn't see the job
         jenkins.login().doLogin("bob");
 
-        // wait for main panel to appear to make sure page is rendered
-        waitFor(by.id("main-panel"), 10);
+        // check for job's existence
+        driver.get(jenkins.getCurrentUrl() + "job/" + j.name + "/");
 
-        assertNull(getElement(by.href("job/"+j.name+"/")));
+        assertFalse(driver.getTitle().contains(j.name));
 
-        // contorl assertion: alice shoudl see the link
+        jenkins.logout();
+
+        // control assertion: alice should see the link
         jenkins.login().doLogin("alice");
 
-        // wait for main panel to appear to make sure page is rendered
-        waitFor(by.id("main-panel"), 10);
+        driver.get(jenkins.getCurrentUrl() + "job/" + j.name + "/");
 
-        assertNotNull(getElement(by.href("job/"+j.name+"/")));
-
+        assertTrue(driver.getTitle().contains(j.name));
         // TODO: variant of href that takes laxed match
     }
 
@@ -98,15 +101,17 @@ public class MatrixAuthPluginTest extends AbstractJUnitTest {
         // just create the job without configuring
         FreeStyleJob j = jenkins.jobs.create();
 
+        jenkins.logout();
+
         // bob shouldn't be able to see it without adding a permission for him
         jenkins.login().doLogin("bob");
 
-        // wait for main panel to appear to make sure page is rendered
-        waitFor(by.id("main-panel"), 10);
+        // check for job's existence
+        driver.get(jenkins.getCurrentUrl() + "job/" + j.name + "/");
 
-        // check that the project is visible
-        assertNull(getElement(by.href("job/"+j.name+"/")));
+        assertFalse(driver.getTitle().contains(j.name));
 
+        jenkins.logout();
 
         // alice will expose this job to bob
         jenkins.login().doLogin("alice");
@@ -119,15 +124,15 @@ public class MatrixAuthPluginTest extends AbstractJUnitTest {
         }
         j.save();
 
+        jenkins.logout();
 
         // bob should see this job
         jenkins.login().doLogin("bob");
 
-        // wait for main panel to appear to make sure page is rendered
-        waitFor(by.id("main-panel"), 10);
+        // check for job's existence
+        driver.get(jenkins.getCurrentUrl() + "job/" + j.name + "/");
 
-        // Check that project now is visible
-        assertTrue("The list of jobs should be bigger than zero", all(by.href("job/"+j.name+"/")).size() > 0);
+        assertTrue(driver.getTitle().contains(j.name));
     }
 
 }
