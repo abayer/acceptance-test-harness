@@ -19,6 +19,7 @@ public class JobsMixIn extends MixIn {
 
     public <T extends TopLevelItem> T create(Class<T> type, String name) {
         visit("newJob");
+        System.err.println("OH YEAH I'M ON " + driver.getWindowHandle());
         fillIn("name", name);
 
         findCaption(type, new Finder<WebElement>() {
