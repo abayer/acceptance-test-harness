@@ -170,8 +170,8 @@ public class FallbackConfig extends AbstractModule {
         // it has a chance to fit the screen nicely if big enough.
         base.manage().window().maximize();
         Dimension oldSize = base.manage().window().getSize();
-        if (oldSize.height < 960 || oldSize.width < 1280) {
-            base.manage().window().setSize(new Dimension(1280, 960));
+        if (oldSize.height < 1050 || oldSize.width < 1680) {
+            base.manage().window().setSize(new Dimension(1680, 1050));
         }
 
         final EventFiringWebDriver d = new EventFiringWebDriver(base);
