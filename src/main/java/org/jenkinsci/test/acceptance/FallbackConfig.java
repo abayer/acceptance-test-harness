@@ -159,6 +159,20 @@ public class FallbackConfig extends AbstractModule {
         return d;
     }
 
+    private void setWindowSize(WebDriver base) {
+        // Make sue the window have minimal resolution set, even when out of the visible screen. Try maximizing first so
+        // it has a chance to fit the screen nicely if big enough.
+        System.err.println("WINDOW SIZE PRE MAXIMIZE: " + base.manage().window().getSize());
+        base.manage().window().maximize();
+        System.err.println("WINDOW SIZE POST MAXIMIZE: " + base.manage().window().getSize());
+        Dimension oldSize = base.manage().window().getSize();
+        if (oldSize.height < 960 || oldSize.width < 1280) {
+            base.manage().window().setSize(new Dimension(1280, 960));
+        }
+        System.err.println("WINDOW SIZE POST RESIZE: " + base.manage().window().getSize());
+
+    }
+
     /**
      * Creates a {@link WebDriver} for each test, then make sure to clean it up at the end.
      */
@@ -166,14 +180,8 @@ public class FallbackConfig extends AbstractModule {
     public WebDriver createWebDriver(TestCleaner cleaner, TestName testName, ElasticTime time) throws IOException {
         WebDriver base = createWebDriver(testName);
 
-        // Make sue the window have minimal resolution set, even when out of the visible screen. Try maximizing first so
-        // it has a chance to fit the screen nicely if big enough.
-        base.manage().window().maximize();
-        Dimension oldSize = base.manage().window().getSize();
-        if (oldSize.height < 960 || oldSize.width < 1280) {
-            base.manage().window().setSize(new Dimension(1280, 960));
-        }
-
+        setWindowSize(base);
+        setWindowSize(base);
         final EventFiringWebDriver d = new EventFiringWebDriver(base);
         d.register(new SanityChecker());
         d.register(new Scroller());
