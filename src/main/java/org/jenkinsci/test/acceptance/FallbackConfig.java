@@ -163,12 +163,11 @@ public class FallbackConfig extends AbstractModule {
         // Make sue the window have minimal resolution set, even when out of the visible screen. Try maximizing first so
         // it has a chance to fit the screen nicely if big enough.
         System.err.println("WINDOW SIZE PRE MAXIMIZE: " + base.manage().window().getSize());
-        base.manage().window().fullscreen();
-//        base.manage().window().maximize();
+        base.manage().window().maximize();
         System.err.println("WINDOW SIZE POST MAXIMIZE: " + base.manage().window().getSize());
         Dimension oldSize = base.manage().window().getSize();
-        if (oldSize.height < 960 || oldSize.width < 1280) {
-            base.manage().window().setSize(new Dimension(1280, 960));
+        if (oldSize.height < 1080 || oldSize.width < 1920) {
+            base.manage().window().setSize(new Dimension(1920, 1080));
         }
         System.err.println("WINDOW SIZE POST RESIZE: " + base.manage().window().getSize());
 
