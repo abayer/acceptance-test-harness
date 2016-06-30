@@ -768,5 +768,23 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>abayer</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/AntPluginTest.java</include>
+                <include>**/AnalysisCollectorPluginTest.java</include>
+                <include>**/HtmlPublisherPluginTest.java</include>
+                <include>**/ViewTest.java</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
