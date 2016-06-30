@@ -112,7 +112,7 @@ public class AnalysisCollectorPluginTest extends AbstractAnalysisTest<AnalysisCo
      * Verifies that no other trend graphs are shown if configured in the graph configuration screen per user.
      */
     @Test @Issue("JENKINS-30270")
-    public void should_deactivate_all_other_trend_graphs() {
+    public void should_deactivate_all_other_trend_graphs() throws Exception {
         FreeStyleJob job = createFreeStyleJob();
 
         buildSuccessfulJob(job);
@@ -131,7 +131,7 @@ public class AnalysisCollectorPluginTest extends AbstractAnalysisTest<AnalysisCo
         assertThatNumberOfGraphsIs(job, 6);
 
         deactivateOtherTrendGraphs(view, false);
-
+        System.err.println(driver.getPageSource());
         assertThatNumberOfGraphsIs(job, 48);
     }
 
